@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client"
+import { Prisma } from "@prisma/client";
 
 export class Task implements Prisma.TaskCreateInput {
     id: number;
@@ -8,7 +8,7 @@ export class Task implements Prisma.TaskCreateInput {
 }
 
 export enum TaskStatus {
-    OPEN = 'OPEN',
-    IN_PROGRESS = 'IN_PROGRESS',
-    DONE = 'DONE',
+    OPEN = "OPEN",
+    IN_PROGRESS = "IN_PROGRESS",
+    DONE = "DONE",
 }

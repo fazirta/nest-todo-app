@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
-import { getTasksFilterDto } from './dto/get-tasks-filter.dto';
-import { Task, TaskStatus } from './task.model';
-import { CreateTaskDto } from './dto/create-task.dto';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PrismaService } from "../prisma.service";
+import { getTasksFilterDto } from "./dto/get-tasks-filter.dto";
+import { Task, TaskStatus } from "./task.model";
+import { CreateTaskDto } from "./dto/create-task.dto";
 
 @Injectable()
 export class TasksService {
@@ -23,7 +23,7 @@ export class TasksService {
             tasks = this.prismaService.task.findMany({
                 where: {
                     status: status,
-                }
+                },
             });
         }
 
@@ -35,8 +35,8 @@ export class TasksService {
                     },
                     description: {
                         contains: search,
-                    }
-                }
+                    },
+                },
             });
         }
 
@@ -47,8 +47,8 @@ export class TasksService {
         const found = await this.prismaService.task.findUnique({
             where: {
                 id: id,
-            }
-        })
+            },
+        });
 
         if (!found) {
             throw new NotFoundException(`Task with ID ${id} not found.`);
@@ -61,7 +61,7 @@ export class TasksService {
         await this.prismaService.task.delete({
             where: {
                 id: id,
-            }
+            },
         });
     }
 
@@ -72,7 +72,7 @@ export class TasksService {
             },
             data: {
                 status: status,
-            }
+            },
         });
         return task;
     }
@@ -85,14 +85,14 @@ export class TasksService {
                 title,
                 description,
                 status: TaskStatus.OPEN,
-            }
+            },
         });
 
-        return ({
+        return {
             id: task.id,
             title: task.title,
             description: task.description,
-            status: task.status
-        });
+            status: task.status,
+        };
     }
 }
